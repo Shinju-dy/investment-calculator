@@ -1,4 +1,11 @@
-export default function Inputs({ onChange, userInput }) {
+import type { InvestmentInput } from "../util/investment";
+
+type InputsProps = {
+  onChange: (inputIdentifier: keyof InvestmentInput, newValue: string) => void;
+  userInput: InvestmentInput;
+};
+
+export default function Inputs({ onChange, userInput }: InputsProps) {
   return (
     <section id="user-input">
       <div className="input-group">
