@@ -1,5 +1,14 @@
-import { calculateInvestmentResults, formatter } from "../util/investment.js";
-export default function Results({ input }) {
+import {
+  calculateInvestmentResults,
+  formatter,
+  type InvestmentInput,
+} from "../util/investment";
+
+type ResultsProps = {
+  input: InvestmentInput;
+};
+
+export default function Results({ input }: ResultsProps) {
   const resultsData = calculateInvestmentResults(input);
   const initialInvestment =
     resultsData[0].valueEndOfYear -

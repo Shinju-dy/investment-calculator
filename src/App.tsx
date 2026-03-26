@@ -1,10 +1,11 @@
 import { useState } from "react";
-import Header from "./components/header.jsx";
-import Inputs from "./components/inputs.jsx";
-import Results from "./components/results.jsx";
+import Header from "./components/header";
+import Inputs from "./components/inputs";
+import Results from "./components/results";
+import type { InvestmentInput } from "./util/investment";
 
 function App() {
-  const [userInput, setUserInput] = useState({
+  const [userInput, setUserInput] = useState<InvestmentInput>({
     initialInvestment: 0,
     annualInvestment: 0,
     expectedReturn: 0,
@@ -13,7 +14,7 @@ function App() {
 
   const inputIsValid = userInput.duration >= 1;
 
-  function handleChange(inputIdentifier, newValue) {
+  function handleChange(inputIdentifier: keyof InvestmentInput, newValue: string) {
     setUserInput((prevUserInput) => {
       return {
         ...prevUserInput,
