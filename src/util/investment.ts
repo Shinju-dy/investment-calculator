@@ -9,6 +9,15 @@ export type InvestmentInput = {
   annualInvestment: number;
   expectedReturn: number;
   duration: number;
+  country: string;
+};
+
+export type InvestmentFormInput = {
+  initialInvestment: string;
+  annualInvestment: string;
+  expectedReturn: string;
+  duration: string;
+  country: string;
 };
 
 export type InvestmentResult = {

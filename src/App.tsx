@@ -2,23 +2,35 @@ import { useState } from "react";
 import Header from "./components/header";
 import Inputs from "./components/inputs";
 import Results from "./components/results";
-import type { InvestmentInput } from "./util/investment";
+import type { InvestmentFormInput, InvestmentInput } from "./util/investment";
 
 function App() {
-  const [userInput, setUserInput] = useState<InvestmentInput>({
-    initialInvestment: 0,
-    annualInvestment: 0,
-    expectedReturn: 0,
-    duration: 0,
+  const [userInput, setUserInput] = useState<InvestmentFormInput>({
+    initialInvestment: "0",
+    annualInvestment: "0",
+    expectedReturn: "0",
+    duration: "0",
+    country: "United States",
   });
 
-  const inputIsValid = userInput.duration >= 1;
+  const investmentInput: InvestmentInput = {
+    initialInvestment: +userInput.initialInvestment,
+    annualInvestment: +userInput.annualInvestment,
+    expectedReturn: +userInput.expectedReturn,
+    duration: +userInput.duration,
+    country: userInput.country,
+  };
 
-  function handleChange(inputIdentifier: keyof InvestmentInput, newValue: string) {
+  const inputIsValid = investmentInput.duration >= 1;
+
+  function handleChange(
+    inputIdentifier: keyof InvestmentFormInput,
+    newValue: string
+  ) {
     setUserInput((prevUserInput) => {
       return {
         ...prevUserInput,
-        [inputIdentifier]: +newValue,
+        [inputIdentifier]: newValue,
       };
     });
   }
@@ -30,7 +42,7 @@ function App() {
       {!inputIsValid && (
         <p className="center">Please enter a duration greater than zero</p>
       )}
-      {inputIsValid && <Results input={userInput} />}
+      {inputIsValid && <Results input={investmentInput} />}
     </>
   );
 }
